@@ -1,0 +1,39 @@
+# Ansible
+*.retry
+*.vault_password
+vault_password.txt
+vault_pass
+*.vault
+*.enc
+
+# Python / venv
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ОС и редакторы
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.bak
+*.backup
+
+# Личные файлы
+notes.md
+todo.txt
