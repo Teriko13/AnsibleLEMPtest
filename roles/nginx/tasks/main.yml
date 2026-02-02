@@ -1,0 +1,24 @@
+---
+- name: Устанавливаем nginx
+  package:
+    name: nginx
+    state: present
+
+- name: Разворачиваем основной конфиг сайта
+  template:
+    src: default-site.j2
+    dest: /etc/nginx/sites-available/default
+    mode: '0644'
+  notify: restart nginx
+
+- name: Удаляем дефолтную страницу Ubuntu (если существует)
+  file:
+    path: /var/www/html/index.nginx-debian.html
+    state: absent
+  ignore_errors: true
+
+- name: Убеждаемся, что nginx запущен и включён
+  service:
+    name: nginx
+    state: started
+    enabled: true

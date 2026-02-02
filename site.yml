@@ -1,0 +1,11 @@
+---
+- name: Развёртывание LEMP-стека
+  hosts: webservers
+  become: true
+
+  roles:
+    - nginx
+    - php-fpm
+    - mariadb
+    - lemp-app
+    - https

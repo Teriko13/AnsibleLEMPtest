@@ -1,0 +1,16 @@
+<?php
+$host = 'localhost';
+$db   = '{{ db_name | default("testdb") }}';
+$user = '{{ db_user | default("testuser") }}';
+$pass = '{{ db_password }}';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "<h1 style='color:green'>Подключение к базе данных успешно!</h1>";
+    echo "<p>База: <b>$db</b>, пользователь: <b>$user</b></p>";
+} catch (PDOException $e) {
+    echo "<h1 style='color:red'>Ошибка подключения</h1>";
+    echo "<pre>" . $e->getMessage() . "</pre>";
+}
+?>

@@ -1,0 +1,26 @@
+---
+- name: Устанавливаем MariaDB
+  package:
+    name: mariadb-server
+    state: present
+
+- name: Запускаем и включаем mariadb
+  service:
+    name: mariadb
+    state: started
+    enabled: true
+
+- name: Создаём тестовую базу данных
+  community.mysql.mysql_db:
+    name: "{{ db_name | default('testdb') }}"
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
+
+- name: Создаём пользователя базы данных
+  community.mysql.mysql_user:
+    name: "{{ db_user | default('testuser') }}"
+    password: "{{ db_password }}"
+    priv: "{{ db_name | default('testdb') }}.*:ALL"
+    host: localhost
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
